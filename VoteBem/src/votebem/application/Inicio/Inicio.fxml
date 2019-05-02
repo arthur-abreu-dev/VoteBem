@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -11,25 +12,26 @@
 
 <AnchorPane id="AnchorPane" prefHeight="510.0" prefWidth="778.0" style="-fx-background-color: #b8edf9;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="votebem.application.Inicio.InicioController">
    <children>
-      <TextField fx:id="tfEmail" layoutX="491.0" layoutY="112.0" prefHeight="39.0" prefWidth="216.0" AnchorPane.bottomAnchor="365.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="112.0" />
-      <PasswordField fx:id="pwSenha" layoutX="491.0" layoutY="181.0" prefHeight="39.0" prefWidth="216.0" AnchorPane.bottomAnchor="296.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="181.0" />
-      <Button fx:id="btnEntrar" layoutX="491.0" layoutY="263.0" mnemonicParsing="false" onAction="#fazerLogin" prefHeight="39.0" prefWidth="216.0" style="-fx-background-color: #0bc6c6;" text="Entrar" AnchorPane.bottomAnchor="209.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="263.0">
+      <TextField fx:id="tfEmail" layoutX="491.0" layoutY="112.0" prefHeight="39.0" prefWidth="216.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="112.0" />
+      <PasswordField fx:id="pwSenha" layoutX="491.0" layoutY="181.0" prefHeight="39.0" prefWidth="216.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="181.0" />
+      <Button fx:id="btnEntrar" layoutX="491.0" layoutY="263.0" mnemonicParsing="false" onAction="#fazerLogin" prefHeight="39.0" prefWidth="216.0" style="-fx-background-color: #0bc6c6;" text="Entrar" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="263.0">
          <font>
             <Font name="Franklin Gothic Medium" size="24.0" />
          </font>
       </Button>
-      <Label fx:id="lblLogin" layoutX="554.0" layoutY="36.0" prefHeight="42.0" prefWidth="90.0" text="Login">
+      <Label fx:id="lblLogin" layoutX="554.0" layoutY="36.0" prefHeight="42.0" prefWidth="90.0" text="Login" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="36.0">
          <font>
             <Font name="Franklin Gothic Medium" size="36.0" />
          </font>
       </Label>
-      <Line endX="100.0" layoutX="599.0" layoutY="345.0" startX="-100.0" AnchorPane.bottomAnchor="170.5" AnchorPane.rightAnchor="78.5" AnchorPane.topAnchor="344.5" />
-      <Button fx:id="btnCadastrar" layoutX="491.0" layoutY="413.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="216.0" style="-fx-background-color: #0bc627;" text="Cadastre-se!" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="413.0">
+      <Line endX="100.0" layoutX="599.0" layoutY="361.0" startX="-100.0" AnchorPane.rightAnchor="78.5" AnchorPane.topAnchor="360.5" />
+      <Button fx:id="btnCadastrar" layoutX="491.0" layoutY="413.0" mnemonicParsing="false" onAction="#fazerCadastro" prefHeight="39.0" prefWidth="216.0" style="-fx-background-color: #0bc627;" text="Cadastre-se!" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="413.0">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Button>
       <Label fx:id="lblImagemLogin" layoutX="-2.0" layoutY="-3.0" prefHeight="519.0" prefWidth="420.0" />
-      <ImageView fx:id="ivLogin" fitHeight="509.0" fitWidth="393.0" layoutX="-2.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="ivLogin" fitHeight="519.0" fitWidth="437.0" layoutX="-2.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+      <CheckBox fx:id="cbLembrarSenha" layoutX="499.0" layoutY="327.0" mnemonicParsing="false" text="Lembrar minha senha" visible="false" />
    </children>
 </AnchorPane>

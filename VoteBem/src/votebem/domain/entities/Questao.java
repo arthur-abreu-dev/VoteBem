@@ -35,13 +35,13 @@ public class Questao implements Serializable {
     private int idPergunta;
     @Column(nullable = false, length = 10)
     private int pontos;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="Resposta",
-			joinColumns={@JoinColumn(name="idResposta")},
-			inverseJoinColumns={@JoinColumn(name="idPergunta")})
-    //@OneToMany(mappedBy = "cursos",targetEntity = Resposta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@ElementCollection
-    private Set<Resposta> respostas;
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name="Resposta",
+//			joinColumns={@JoinColumn(name="idResposta")},
+//			inverseJoinColumns={@JoinColumn(name="idPergunta")})
+//    //@OneToMany(mappedBy = "cursos",targetEntity = Resposta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    //@ElementCollection
+//    private Set<Resposta> respostas;
     @Column(nullable = false, unique = true)
     private String pergunta;
     @Column(nullable = false)
@@ -71,13 +71,13 @@ public class Questao implements Serializable {
         this.pontos = pontos;
     }
 
-    public Set<Resposta> getRespostas() {
-        return respostas;
-    }
-
-    public void setRespostas(Set<Resposta> respostas) {
-        this.respostas = respostas;
-    }
+//    public Set<Resposta> getRespostas() {
+//        return respostas;
+//    }
+//
+//    public void setRespostas(Set<Resposta> respostas) {
+//        this.respostas = respostas;
+//    }
 
     public String getPergunta() {
         return pergunta;

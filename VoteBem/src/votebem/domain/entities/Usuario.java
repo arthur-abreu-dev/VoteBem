@@ -25,11 +25,23 @@ public class Usuario implements Serializable {
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
-    private int senha;  
+    private String senha;  
     @Column
     private int pontos;
     @Column(nullable = false)
     private String nomeUsu;
+    @Column
+    private String sexo;
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+    
 
     public int getIdUsuario() {
         return idUsuario;
@@ -47,11 +59,11 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public int getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public void setSenha(int senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 

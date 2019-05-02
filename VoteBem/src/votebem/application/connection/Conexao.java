@@ -51,7 +51,7 @@ public class Conexao {
     }
     
     public <T extends Object> T procurarObjeto(Class<T> type, String tabela,String Condicao){
-      if(em.getTransaction().isActive())
+      if(!em.getTransaction().isActive())
         em.getTransaction().begin(); 
         Query q = em.createQuery("SELECT id FROM "+tabela+" WHERE "+Condicao);
         em.getTransaction().commit();
@@ -60,7 +60,7 @@ public class Conexao {
         
     }
     public String findFieldValue(String campo, String tabela,String condicao){      
-      if(em.getTransaction().isActive())
+       if(!em.getTransaction().isActive())
        em.getTransaction().begin(); 
        Query q = em.createQuery("SELECT "+campo+" FROM "+tabela+" WHERE "+condicao+"");
        em.getTransaction().commit();
