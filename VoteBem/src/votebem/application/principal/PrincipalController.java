@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package votebem.application.principal;
 
 import java.net.URL;
@@ -13,13 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -27,6 +16,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import votebem.application.connection.Conexao;
+import votebem.domain.DAO.UsuarioDAO;
+import votebem.domain.entities.Usuario;
 
 /**
  * FXML Controller class
@@ -102,9 +94,6 @@ public class PrincipalController implements Initializable {
     private Label lblNome;
 
     @FXML
-    private Label lblIdade;
-
-    @FXML
     private Label lblPontuacao;
 
     @FXML
@@ -139,6 +128,13 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private Button btnSair;
+    
+    @FXML
+    private ComboBox<String> cbTemaParaResponder;
+    
+    private Conexao conn = new Conexao();
+    
+    public static PrincipalController CurrentController;  
 
     @FXML
     void abrirAnchorEditarPerfil(ActionEvent event) {
@@ -176,6 +172,36 @@ public class PrincipalController implements Initializable {
         apSugerirQuestao.visibleProperty().set(true);
         apSugerirQuestao.toFront();
     }
+    
+      @FXML
+    void pularQuestao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void responderOpcaoA(ActionEvent event) {
+
+    }
+
+    @FXML
+    void responderOpcaoB(ActionEvent event) {
+
+    }
+
+    @FXML
+    void responderOpcaoC(ActionEvent event) {
+
+    }
+
+    @FXML
+    void responderOpcaoD(ActionEvent event) {
+
+    }
+
+    @FXML
+    void responderQuestao(ActionEvent event) {
+
+    }
   
 
     @FXML
@@ -209,9 +235,307 @@ public class PrincipalController implements Initializable {
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }  
+        CurrentController = this;
+        try{
+        for(int i =1;i<= Integer.parseInt(conn.executeQueryUniqueResult("SELECT MAX(idTema) FROM Tema"));i++){
+         String nomeTema =  conn.executeQueryUniqueResult("SELECT nome FROM Tema WHERE idTema = '"+i+"'"); 
+         if(!"".equals(nomeTema))
+         cbTemaParaResponder.getItems().add(nomeTema);
+        }
+        }catch(Exception e){
+            System.out.println(e.getMessage()); 
+       }
+    }
 
+    public StackPane getSpPrincipal() {
+        return spPrincipal;
+    }
+
+    public void setSpPrincipal(StackPane spPrincipal) {
+        this.spPrincipal = spPrincipal;
+    }
+
+    public AnchorPane getApResponderQuestoes() {
+        return apResponderQuestoes;
+    }
+
+    public void setApResponderQuestoes(AnchorPane apResponderQuestoes) {
+        this.apResponderQuestoes = apResponderQuestoes;
+    }
+
+    public Label getLblQuestaoNumero() {
+        return lblQuestaoNumero;
+    }
+
+    public void setLblQuestaoNumero(Label lblQuestaoNumero) {
+        this.lblQuestaoNumero = lblQuestaoNumero;
+    }
+
+    public Label getLblQuestao() {
+        return lblQuestao;
+    }
+
+    public void setLblQuestao(Label lblQuestao) {
+        this.lblQuestao = lblQuestao;
+    }
+
+    public Button getBtnOpcaoA() {
+        return btnOpcaoA;
+    }
+
+    public void setBtnOpcaoA(Button btnOpcaoA) {
+        this.btnOpcaoA = btnOpcaoA;
+    }
+
+    public Button getBtnOpcaoB() {
+        return btnOpcaoB;
+    }
+
+    public void setBtnOpcaoB(Button btnOpcaoB) {
+        this.btnOpcaoB = btnOpcaoB;
+    }
+
+    public Button getBtnOpcaoC() {
+        return btnOpcaoC;
+    }
+
+    public void setBtnOpcaoC(Button btnOpcaoC) {
+        this.btnOpcaoC = btnOpcaoC;
+    }
+
+    public Button getBtnOpcaoD() {
+        return btnOpcaoD;
+    }
+
+    public void setBtnOpcaoD(Button btnOpcaoD) {
+        this.btnOpcaoD = btnOpcaoD;
+    }
+
+    public Button getBtnresponderQuestao() {
+        return btnresponderQuestao;
+    }
+
+    public void setBtnresponderQuestao(Button btnresponderQuestao) {
+        this.btnresponderQuestao = btnresponderQuestao;
+    }
+
+    public Button getBtnPularQuestao() {
+        return btnPularQuestao;
+    }
+
+    public void setBtnPularQuestao(Button btnPularQuestao) {
+        this.btnPularQuestao = btnPularQuestao;
+    }
+
+    public AnchorPane getApEditarPerfil() {
+        return apEditarPerfil;
+    }
+
+    public void setApEditarPerfil(AnchorPane apEditarPerfil) {
+        this.apEditarPerfil = apEditarPerfil;
+    }
+
+    public AnchorPane getApSugerirQuestao() {
+        return apSugerirQuestao;
+    }
+
+    public void setApSugerirQuestao(AnchorPane apSugerirQuestao) {
+        this.apSugerirQuestao = apSugerirQuestao;
+    }
+
+    public ComboBox<String> getCbEscolherTema() {
+        return cbEscolherTema;
+    }
+
+    public void setCbEscolherTema(ComboBox<String> cbEscolherTema) {
+        this.cbEscolherTema = cbEscolherTema;
+    }
+
+    public TextArea getTaQuestao() {
+        return taQuestao;
+    }
+
+    public void setTaQuestao(TextArea taQuestao) {
+        this.taQuestao = taQuestao;
+    }
+
+    public TextArea getTaOpcaoA() {
+        return taOpcaoA;
+    }
+
+    public void setTaOpcaoA(TextArea taOpcaoA) {
+        this.taOpcaoA = taOpcaoA;
+    }
+
+    public TextArea getTaOpcaoB() {
+        return taOpcaoB;
+    }
+
+    public void setTaOpcaoB(TextArea taOpcaoB) {
+        this.taOpcaoB = taOpcaoB;
+    }
+
+    public TextArea getTaOpcaoC() {
+        return taOpcaoC;
+    }
+
+    public void setTaOpcaoC(TextArea taOpcaoC) {
+        this.taOpcaoC = taOpcaoC;
+    }
+
+    public TextArea getTaOpcaoD() {
+        return taOpcaoD;
+    }
+
+    public void setTaOpcaoD(TextArea taOpcaoD) {
+        this.taOpcaoD = taOpcaoD;
+    }
+
+    public AnchorPane getApRanking() {
+        return apRanking;
+    }
+
+    public void setApRanking(AnchorPane apRanking) {
+        this.apRanking = apRanking;
+    }
+
+    public AnchorPane getApPerfil() {
+        return apPerfil;
+    }
+
+    public void setApPerfil(AnchorPane apPerfil) {
+        this.apPerfil = apPerfil;
+    }
+
+    public Button getBtnEditarPerfil() {
+        return btnEditarPerfil;
+    }
+
+    public void setBtnEditarPerfil(Button btnEditarPerfil) {
+        this.btnEditarPerfil = btnEditarPerfil;
+    }
+
+    public Label getLblNome() {
+        return lblNome;
+    }
+
+    public void setLblNome(String lblNome) {
+        this.lblNome.setText(this.lblNome.getText()+" " +lblNome);
+    }
+
+    public Label getLblPontuacao() {
+        return lblPontuacao;
+    }
+
+    public void setLblPontuacao(String lblPontuacao) {
+        this.lblPontuacao.setText(this.lblPontuacao.getText()+" "+lblPontuacao);
+    }
+
+    public Label getLblPosicao() {
+        return lblPosicao;
+    }
+
+    public void setLblPosicao(Label lblPosicao) {
+        this.lblPosicao = lblPosicao;
+    }
+
+    public Label getLblNVisitas() {
+        return lblNVisitas;
+    }
+
+    public void setLblNVisitas(Label lblNVisitas) {
+        this.lblNVisitas = lblNVisitas;
+    }
+
+    public ImageView getIvGrafico() {
+        return ivGrafico;
+    }
+
+    public void setIvGrafico(ImageView ivGrafico) {
+        this.ivGrafico = ivGrafico;
+    }
+
+    public Button getBtnPerfil() {
+        return btnPerfil;
+    }
+
+    public void setBtnPerfil(Button btnPerfil) {
+        this.btnPerfil = btnPerfil;
+    }
+
+    public Button getBtnResponderQuestoes() {
+        return btnResponderQuestoes;
+    }
+
+    public void setBtnResponderQuestoes(Button btnResponderQuestoes) {
+        this.btnResponderQuestoes = btnResponderQuestoes;
+    }
+
+    public Button getBtnRanking() {
+        return btnRanking;
+    }
+
+    public void setBtnRanking(Button btnRanking) {
+        this.btnRanking = btnRanking;
+    }
+
+    public Button getBtnSugerirQuestao() {
+        return btnSugerirQuestao;
+    }
+
+    public void setBtnSugerirQuestao(Button btnSugerirQuestao) {
+        this.btnSugerirQuestao = btnSugerirQuestao;
+    }
+
+    public Label getLblImgPerfil() {
+        return lblImgPerfil;
+    }
+
+    public void setLblImgPerfil(Label lblImgPerfil) {
+        this.lblImgPerfil = lblImgPerfil;
+    }
+
+    public ImageView getIvImgPerfil() {
+        return ivImgPerfil;
+    }
+
+    public void setIvImgPerfil(ImageView ivImgPerfil) {
+        this.ivImgPerfil = ivImgPerfil;
+    }
+
+    public Label getLblNomeUser() {
+        return lblNomeUser;
+    }
+
+    public void setLblNomeUser(String lblNomeUser) {
+        this.lblNomeUser.setText(lblNomeUser);
+    }
+
+    public Button getBtnSair() {
+        return btnSair;
+    }
+
+    public void setBtnSair(Button btnSair) {
+        this.btnSair = btnSair;
+    }
+
+    public Conexao getConn() {
+        return conn;
+    }
+
+    public void setConn(Conexao conn) {
+        this.conn = conn;
+    }
+
+    public static PrincipalController getCurrentController() {
+        return CurrentController;
+    }
+
+    public static void setCurrentController(PrincipalController CurrentController) {
+        PrincipalController.CurrentController = CurrentController;
+    }
+    
+    
 }
 
   

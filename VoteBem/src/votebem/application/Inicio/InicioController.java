@@ -18,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import votebem.application.cadastro.CadastroController;
 import votebem.application.connection.Conexao;
@@ -64,6 +66,16 @@ public class InicioController implements Initializable{
        }
    
     }
+     
+         @FXML
+    void fazerLoginEnter(KeyEvent event) {
+         if(event.getCode() == KeyCode.ENTER)
+        {
+            logIn();
+        }
+    }
+     
+
 
      
     @Override
@@ -71,15 +83,21 @@ public class InicioController implements Initializable{
     } 
     @FXML
     public void fazerLogin(ActionEvent actionEvent){  
-     try{
+     logIn();
+    }  
+    
+    private void logIn(){
+    try{
       if(!"".equals(tfEmail.getText()) && tfEmail.getText() != null && !"".equals(pwSenha.getText()) && pwSenha.getText() != null){ 
-        if(conn.findFieldValue("idUsuario", "Usuario", " email = '"+tfEmail.getText().toLowerCase()+"' and senha = '"+pwSenha.getText()+"'") != null){ 
+        String usu = conn.findFieldValue("idUsuario", "Usuario", " email = '"+tfEmail.getText().toLowerCase()+"' and senha = '"+pwSenha.getText()+"'");
+          if( usu != null && !"".equals(usu)){ 
            Principal principal= new Principal();
            fecharAplicacao();
                         try {
                             principal.start(new Stage());
-                            //VisaoProfessorController.CurrentController.setIdUsuario(idUsuario);
-                            //VisaoProfessorController.CurrentController.setLblUserProf();
+                            PrincipalController.CurrentController.setLblNomeUser(conn.findFieldValue("nomeUsu", "Usuario", "idUsuario = '"+usu+"'"));
+                            PrincipalController.CurrentController.setLblNome(conn.findFieldValue("nomeUsu", "Usuario", "idUsuario = '"+usu+"'"));
+                            PrincipalController.CurrentController.setLblPontuacao(conn.findFieldValue("pontos", "Usuario", "idUsuario = '"+usu+"'"));
 
                         } catch (Exception ex) {
                             Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,7 +133,7 @@ public class InicioController implements Initializable{
             
 
      }    
-    }   
+    }
     
     public void fazerCadastro(ActionEvent event) {
              Cadastro cadastro = new Cadastro();

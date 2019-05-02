@@ -1,5 +1,6 @@
 package votebem.application.connection;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -51,8 +52,8 @@ public class Conexao {
     }
     
     public <T extends Object> T procurarObjeto(Class<T> type, String tabela,String Condicao){
-      if(!em.getTransaction().isActive())
-        em.getTransaction().begin(); 
+        if(!em.getTransaction().isActive())
+           em.getTransaction().begin(); 
         Query q = em.createQuery("SELECT id FROM "+tabela+" WHERE "+Condicao);
         em.getTransaction().commit();
         return em.find(type, q.getResultList().get(0));
@@ -61,10 +62,42 @@ public class Conexao {
     }
     public String findFieldValue(String campo, String tabela,String condicao){      
        if(!em.getTransaction().isActive())
-       em.getTransaction().begin(); 
+         em.getTransaction().begin(); 
        Query q = em.createQuery("SELECT "+campo+" FROM "+tabela+" WHERE "+condicao+"");
        em.getTransaction().commit();
        return q.getResultList().get(0).toString();
     }
+   
+    public List<Object> findObjectListFiltered(String tabela,String condicao){      
+       if(!em.getTransaction().isActive())
+         em.getTransaction().begin(); 
+       Query q = em.createQuery("SELECT * FROM "+tabela+" WHERE "+condicao+"");
+       em.getTransaction().commit();
+       return q.getResultList();
+    }
     
+      public List<Object> findObjectList(String tabela,String campos){      
+       if(!em.getTransaction().isActive())
+         em.getTransaction().begin(); 
+       Query q = em.createQuery("SELECT "+campos+" FROM "+tabela);//campos separados por virgula
+       em.getTransaction().commit();
+       return q.getResultList();
+    }
+      
+    public String executeQueryUniqueResult(String query){
+     if(!em.getTransaction().isActive())
+         em.getTransaction().begin(); 
+       Query q = em.createQuery(query);//campos separados por virgula
+       em.getTransaction().commit();
+       return q.getResultList().get(0).toString();
+    }  
+    
+    public List<String> executeQuery(String query){
+     if(!em.getTransaction().isActive())
+         em.getTransaction().begin(); 
+       Query q = em.createQuery(query);//campos separados por virgula
+       em.getTransaction().commit();
+       return q.getResultList();
+    } 
+
 }
