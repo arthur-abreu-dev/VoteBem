@@ -27,6 +27,9 @@ import votebem.application.main.Cadastro;
 import votebem.application.main.Inicio;
 import votebem.application.main.Principal;
 import votebem.application.principal.PrincipalController;
+import votebem.domain.entities.Questao;
+import votebem.domain.entities.Resposta;
+import votebem.domain.entities.Tema;
 
 public class InicioController implements Initializable{
 
@@ -87,6 +90,19 @@ public class InicioController implements Initializable{
     }  
     
     private void logIn(){
+        Questao q = new Questao();
+        q.setPergunta("n sei");
+        q.setPontos(100);
+        Tema tema = new Tema();
+        tema.setNome("sei la");
+        tema.setPonto(0);
+        q.setTema(tema);
+        Resposta resp = new Resposta();
+        resp.setRespCerta("sim");
+        resp.setResposta("não");
+        q.respostas.add(resp);
+        
+        conn.Salvar(q);
     try{
       if(!"".equals(tfEmail.getText()) && tfEmail.getText() != null && !"".equals(pwSenha.getText()) && pwSenha.getText() != null){ 
         String usu = conn.findFieldValue("idUsuario", "Usuario", " email = '"+tfEmail.getText().toLowerCase()+"' and senha = '"+pwSenha.getText()+"'");

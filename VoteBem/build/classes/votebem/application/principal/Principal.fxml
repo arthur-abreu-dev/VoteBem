@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -23,33 +26,8 @@
    <children>
       <StackPane fx:id="spPrincipal" layoutX="258.0" prefHeight="599.0" prefWidth="614.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="258.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane fx:id="apSugerirQuestao" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f2f9ff;" visible="false">
-               <children>
-                  <Label layoutX="88.0" layoutY="77.0" prefHeight="21.0" prefWidth="98.0" text="Escolher o Tema" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="77.0" />
-                  <ComboBox fx:id="cbEscolherTema" layoutX="206.0" layoutY="75.0" prefHeight="25.0" prefWidth="270.0" />
-                  <Label layoutX="88.0" layoutY="167.0" prefHeight="21.0" prefWidth="98.0" text="Titulo da Questão" />
-                  <TextArea fx:id="taQuestao" layoutX="206.0" layoutY="152.0" prefHeight="50.0" prefWidth="380.0" />
-                  <Label layoutX="88.0" layoutY="242.0" prefHeight="21.0" prefWidth="110.0" text="Opções da Questão" />
-                  <Label layoutX="92.0" layoutY="289.0" prefHeight="21.0" prefWidth="80.0" text="Opção A: " />
-                  <Label layoutX="93.0" layoutY="342.0" prefHeight="21.0" prefWidth="88.0" text="Opção B: " />
-                  <Label layoutX="93.0" layoutY="401.0" prefHeight="21.0" prefWidth="88.0" text="Opção C: " />
-                  <Label layoutX="92.0" layoutY="457.0" prefHeight="21.0" prefWidth="80.0" text="Opção D: " />
-                  <TextArea fx:id="taOpcaoA" layoutX="206.0" layoutY="278.0" prefHeight="43.0" prefWidth="380.0" />
-                  <TextArea fx:id="taOpcaoB" layoutX="206.0" layoutY="331.0" prefHeight="43.0" prefWidth="380.0" />
-                  <TextArea fx:id="taOpcaoC" layoutX="206.0" layoutY="390.0" prefHeight="43.0" prefWidth="380.0" />
-                  <TextArea fx:id="taOpcaoD" layoutX="206.0" layoutY="446.0" prefHeight="43.0" prefWidth="380.0" text="&#10;" />
-                  <Button layoutX="425.0" layoutY="536.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="161.0" style="-fx-background-color: #0bc627;" text="Sugerir Questão">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="apEditarPerfil" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f2f9ff;" visible="false" />
-            <AnchorPane fx:id="apRanking" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f2f9ff;" visible="false">
+            <AnchorPane fx:id="apEditarPerfil" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #99C4FF;" visible="false" />
+            <AnchorPane fx:id="apRanking" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #99C4FF;" visible="false">
                <children>
                   <TableView layoutX="20.0" layoutY="125.0" prefHeight="390.0" prefWidth="580.0">
                     <columns>
@@ -66,11 +44,86 @@
                   <ComboBox layoutX="153.0" layoutY="40.0" prefHeight="25.0" prefWidth="192.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apPerfil" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f2f9ff;">
+            <AnchorPane fx:id="apSugerirQuestao" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #99C4FF;">
                <children>
-                  <Button fx:id="btnEditarPerfil" layoutX="408.0" layoutY="21.0" mnemonicParsing="false" onAction="#abrirAnchorEditarPerfil" prefHeight="50.0" prefWidth="192.0" style="-fx-background-color: #0bc6c6;" text="Editar Perfil" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="21.0">
+                  <Label layoutX="88.0" layoutY="77.0" prefHeight="21.0" prefWidth="98.0" text="Escolher o Tema" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="77.0" />
+                  <ComboBox fx:id="cbEscolherTema" layoutX="206.0" layoutY="75.0" prefHeight="25.0" prefWidth="270.0" />
+                  <Label layoutX="88.0" layoutY="167.0" prefHeight="21.0" prefWidth="98.0" text="Titulo da Questão" />
+                  <TextArea fx:id="taQuestao" layoutX="206.0" layoutY="152.0" prefHeight="50.0" prefWidth="380.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="28.0" />
+                  <Label layoutX="88.0" layoutY="242.0" prefHeight="21.0" prefWidth="110.0" text="Opções da Questão" />
+                  <Label layoutX="92.0" layoutY="289.0" prefHeight="21.0" prefWidth="80.0" text="Opção A: " />
+                  <Label layoutX="93.0" layoutY="342.0" prefHeight="21.0" prefWidth="88.0" text="Opção B: " />
+                  <Label layoutX="93.0" layoutY="401.0" prefHeight="21.0" prefWidth="88.0" text="Opção C: " />
+                  <Label layoutX="92.0" layoutY="457.0" prefHeight="21.0" prefWidth="80.0" text="Opção D: " />
+                  <TextArea fx:id="taOpcaoA" layoutX="206.0" layoutY="289.0" prefHeight="43.0" prefWidth="380.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="28.0" />
+                  <TextArea fx:id="taOpcaoB" layoutX="206.0" layoutY="345.0" prefHeight="43.0" prefWidth="380.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="28.0" />
+                  <TextArea fx:id="taOpcaoC" layoutX="206.0" layoutY="404.0" prefHeight="43.0" prefWidth="380.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="28.0" />
+                  <TextArea fx:id="taOpcaoD" layoutX="206.0" layoutY="460.0" prefHeight="43.0" prefWidth="380.0" text="&#10;" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="28.0" />
+                  <Button fx:id="btnSugerirQuestao" layoutX="394.0" layoutY="532.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="192.0" style="-fx-background-color: #0bc627;" text="Sugerir Questão" textFill="WHITE" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="28.0">
                      <font>
-                        <Font name="Arial" size="18.0" />
+                        <Font name="Verdana Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <CheckBox fx:id="cbCorretaA" layoutX="88.0" layoutY="313.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="72.0" text="Correta" />
+                  <CheckBox fx:id="cbCorretaB" layoutX="88.0" layoutY="366.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="72.0" text="Correta" />
+                  <CheckBox fx:id="cbCorretaC" layoutX="88.0" layoutY="425.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="72.0" text="Correta" />
+                  <CheckBox fx:id="cbCorretaD" layoutX="88.0" layoutY="481.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="72.0" text="Correta" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apResponderQuestoes" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #99C4FF;" StackPane.alignment="CENTER">
+               <children>
+                  <ComboBox fx:id="cbTemaParaResponder" layoutX="39.0" layoutY="29.0" prefHeight="35.0" prefWidth="258.0" promptText="Tema" />
+                  <Label fx:id="lblQuestaoNumero" layoutX="39.0" layoutY="101.0" prefHeight="17.0" prefWidth="88.0" text="Questão Nº x" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblQuestao" layoutX="39.0" layoutY="147.0" prefHeight="43.0" prefWidth="442.0" text="Questão xxxxxxxxxxxxxxxxxxxxxxxxxxx" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnOpcaoA" alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="238.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#responderOpcaoA" prefHeight="50.0" prefWidth="556.0" style="-fx-background-color: #264B80;" text="op 1" textFill="WHITE" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="19.0">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font></Button>
+                  <Label layoutX="39.0" layoutY="204.0" prefHeight="17.0" prefWidth="98.0" text="Alternativas" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnOpcaoB" layoutX="39.0" layoutY="312.0" mnemonicParsing="false" onAction="#responderOpcaoB" prefHeight="50.0" prefWidth="556.0" style="-fx-background-color: #264B80;" text="op 2" textFill="WHITE" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="19.0">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font></Button>
+                  <Button fx:id="btnOpcaoC" layoutX="39.0" layoutY="384.0" mnemonicParsing="false" onAction="#responderOpcaoC" prefHeight="50.0" prefWidth="556.0" style="-fx-background-color: #264B80;" text="op 3" textFill="WHITE" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="19.0">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font></Button>
+                  <Button fx:id="btnOpcaoD" layoutX="39.0" layoutY="458.0" mnemonicParsing="false" onAction="#responderOpcaoD" prefHeight="50.0" prefWidth="556.0" style="-fx-background-color: #264B80;" text="op 4" textFill="WHITE" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="19.0">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font></Button>
+                  <Button fx:id="btnresponderQuestao" layoutX="371.0" layoutY="534.0" mnemonicParsing="false" onAction="#responderQuestao" prefHeight="43.0" prefWidth="136.0" style="-fx-background-color: #0bc627; -fx-background-radius: 50;" text="Responder" textFill="WHITE" AnchorPane.rightAnchor="108.0">
+                     <font>
+                        <Font name="Verdana Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnPularQuestao" layoutX="155.0" layoutY="534.0" maxHeight="50.0" maxWidth="136.0" mnemonicParsing="false" onAction="#pularQuestao" prefHeight="43.0" prefWidth="136.0" style="-fx-background-color: #f22b2b; -fx-background-radius: 50;" text="Pular" textFill="WHITE" AnchorPane.leftAnchor="120.0">
+                     <font>
+                        <Font name="Verdana Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apPerfil" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #99C4FF;">
+               <children>
+                  <Button fx:id="btnEditarPerfil" layoutX="408.0" layoutY="21.0" mnemonicParsing="false" onAction="#abrirAnchorEditarPerfil" prefHeight="50.0" prefWidth="192.0" style="-fx-background-color: #264B80; -fx-background-radius: 50;" text="Editar Perfil" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="21.0">
+                     <font>
+                        <Font name="Verdana Bold" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -96,81 +149,47 @@
                         <Font name="Arial" size="18.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="ivGrafico" fitHeight="343.0" fitWidth="352.0" layoutX="248.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="180.22515869140625" AnchorPane.topAnchor="181.0">
-                     <image>
-                        <Image url="@../resources/grafico.png" />
-                     </image>
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="apResponderQuestoes" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f2f9ff;">
-               <children>
-                  <ComboBox fx:id="cbTemaParaResponder" layoutX="39.0" layoutY="29.0" prefHeight="35.0" prefWidth="258.0" promptText="Tema" />
-                  <Label fx:id="lblQuestaoNumero" layoutX="39.0" layoutY="101.0" prefHeight="17.0" prefWidth="88.0" text="Questão Nº x">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblQuestao" layoutX="39.0" layoutY="147.0" prefHeight="43.0" prefWidth="442.0" text="Questão xxxxxxxxxxxxxxxxxxxxxxxxxxx">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="btnOpcaoA" layoutX="39.0" layoutY="238.0" mnemonicParsing="false" onAction="#responderOpcaoA" prefHeight="50.0" prefWidth="556.0" style="-fx-background-color: #abdcea;" text="op 1" />
-                  <Label layoutX="39.0" layoutY="204.0" prefHeight="17.0" prefWidth="80.0" text="Alternativas">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="btnOpcaoB" layoutX="39.0" layoutY="312.0" mnemonicParsing="false" onAction="#responderOpcaoB" prefHeight="50.0" prefWidth="556.0" style="-fx-background-color: #abdcea;" text="op 2" />
-                  <Button fx:id="btnOpcaoC" layoutX="39.0" layoutY="384.0" mnemonicParsing="false" onAction="#responderOpcaoC" prefHeight="50.0" prefWidth="556.0" style="-fx-background-color: #abdcea;" text="op 3" />
-                  <Button fx:id="btnOpcaoD" layoutX="39.0" layoutY="458.0" mnemonicParsing="false" onAction="#responderOpcaoD" prefHeight="50.0" prefWidth="556.0" style="-fx-background-color: #abdcea;" text="op 4" />
-                  <Button fx:id="btnresponderQuestao" layoutX="371.0" layoutY="534.0" mnemonicParsing="false" onAction="#responderQuestao" prefHeight="43.0" prefWidth="124.0" style="-fx-background-color: #0bc627;" text="Responder">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="btnPularQuestao" layoutX="155.0" layoutY="534.0" mnemonicParsing="false" onAction="#pularQuestao" prefHeight="43.0" prefWidth="117.0" style="-fx-background-color: #f22b2b;" text="Pular">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Button>
+                  <BarChart layoutX="208.0" layoutY="144.0" prefHeight="340.0" prefWidth="406.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="208.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="144.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
                </children>
             </AnchorPane>
          </children>
       </StackPane>
-      <Pane prefHeight="599.0" prefWidth="258.0" style="-fx-background-color: #b8edf9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="599.0" prefWidth="258.0" style="-fx-background-color: #3D79CC;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btnPerfil" layoutX="7.0" layoutY="136.0" mnemonicParsing="false" onAction="#abrirAnchorPerfil" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #0bc6c6;" text="Perfil">
+            <Button fx:id="btnPerfil" layoutX="7.0" layoutY="136.0" mnemonicParsing="false" onAction="#abrirAnchorPerfil" prefHeight="60.0" prefWidth="243.0" style="-fx-background-color: #264B80; -fx-background-radius: 50;" text="Perfil" textFill="WHITE">
                <font>
-                  <Font name="Arial" size="18.0" />
+                  <Font name="Verdana Bold" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnResponderQuestoes" layoutX="7.0" layoutY="219.0" mnemonicParsing="false" onAction="#abrirAnchorResponderQuestoes" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #0bc6c6;" text="Responder Questões">
+            <Button fx:id="btnResponderQuestoes" layoutX="7.0" layoutY="219.0" mnemonicParsing="false" onAction="#abrirAnchorResponderQuestoes" prefHeight="60.0" prefWidth="243.0" style="-fx-background-color: #264B80; -fx-background-radius: 50;" text="Responder Questões" textFill="WHITE">
                <font>
-                  <Font name="Arial" size="18.0" />
+                  <Font name="Verdana Bold" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnRanking" layoutX="7.0" layoutY="300.0" mnemonicParsing="false" onAction="#abrirAnchorRanking" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #0bc6c6;" text="Ranking">
+            <Button fx:id="btnRanking" layoutX="7.0" layoutY="300.0" mnemonicParsing="false" onAction="#abrirAnchorRanking" prefHeight="60.0" prefWidth="243.0" style="-fx-background-color: #264B80; -fx-background-radius: 50;" text="Ranking" textFill="WHITE">
                <font>
-                  <Font name="Arial" size="18.0" />
+                  <Font name="Verdana Bold" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnSugerirQuestao" layoutX="7.0" layoutY="377.0" mnemonicParsing="false" onAction="#abrirAnchorSugerirQuestao" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #0bc6c6;" text="Sugerir Questão">
+            <Button fx:id="btnSugerirQuestao" layoutX="7.0" layoutY="377.0" mnemonicParsing="false" onAction="#abrirAnchorSugerirQuestao" prefHeight="60.0" prefWidth="243.0" style="-fx-background-color: #264B80; -fx-background-radius: 50;" text="Sugerir Questão" textFill="WHITE">
                <font>
-                  <Font name="Arial" size="18.0" />
+                  <Font name="Verdana Bold" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -185,10 +204,13 @@
                   </ImageView>
                </graphic>
             </Label>
-            <Label fx:id="lblNomeUser" layoutX="118.0" layoutY="51.0" prefHeight="17.0" prefWidth="124.0" text="Nome" />
-            <Button fx:id="btnSair" layoutX="7.0" layoutY="462.0" mnemonicParsing="false" onAction="#sairDoSistema" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #0bc6c6;" text="Sair">
+            <Label fx:id="lblNomeUser" layoutX="118.0" layoutY="51.0" prefHeight="17.0" prefWidth="124.0" text="Nome" textFill="WHITE">
                <font>
-                  <Font name="Arial" size="18.0" />
+                  <Font name="Verdana Bold" size="14.0" />
+               </font></Label>
+            <Button fx:id="btnSair" layoutX="7.0" layoutY="456.0" mnemonicParsing="false" onAction="#sairDoSistema" prefHeight="60.0" prefWidth="243.0" style="-fx-background-color: #264B80; -fx-background-radius: 50;" text="Sair" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

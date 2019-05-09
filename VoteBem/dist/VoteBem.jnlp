@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="VoteBem.jar" size="1121651" download="eager" />
+    <jar href="VoteBem.jar" size="1123993" download="eager" />
     <jar href="lib\antlr-2.7.6.jar" size="443432" download="eager" />
     <jar href="lib\c3p0-0.9.1.2.jar" size="610790" download="eager" />
     <jar href="lib\cglib-nodep-2.1_3.jar" size="324238" download="eager" />
@@ -23,6 +23,7 @@
     <jar href="lib\hibernate3.jar" size="2255753" download="eager" />
     <jar href="lib\javassist.jar" size="471005" download="eager" />
     <jar href="lib\jboss-archive-browsing.jar" size="413698" download="eager" />
+    <jar href="lib\jfoenix-0.0.0-SNAPSHOT.jar" size="2685549" download="eager" />
     <jar href="lib\jta.jar" size="8812" download="eager" />
     <jar href="lib\log4j-1.2.11.jar" size="350627" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.47-bin.jar" size="1007505" download="eager" />

@@ -17,8 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import votebem.application.connection.Conexao;
-import votebem.domain.DAO.UsuarioDAO;
-import votebem.domain.entities.Usuario;
 
 /**
  * FXML Controller class
@@ -236,8 +234,17 @@ public class PrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         CurrentController = this;
+        carregarTemas();
+        
+             
+        
+    }
+    
+    private void carregarTemas(){
+            //carrega os temas para responder perguntas
+        int auxPerg = Integer.parseInt(conn.executeQueryUniqueResult("SELECT MAX(idTema) FROM Tema"));    
         try{
-        for(int i =1;i<= Integer.parseInt(conn.executeQueryUniqueResult("SELECT MAX(idTema) FROM Tema"));i++){
+        for(int i =1;i<= auxPerg;i++){
          String nomeTema =  conn.executeQueryUniqueResult("SELECT nome FROM Tema WHERE idTema = '"+i+"'"); 
          if(!"".equals(nomeTema))
          cbTemaParaResponder.getItems().add(nomeTema);
@@ -245,6 +252,10 @@ public class PrincipalController implements Initializable {
         }catch(Exception e){
             System.out.println(e.getMessage()); 
        }
+    }
+    
+    private void carregarPerguntas(){
+    
     }
 
     public StackPane getSpPrincipal() {

@@ -22,8 +22,8 @@ public class Conexao {
     public void Salvar(Object o){
         try{    
            if(!em.getTransaction().isActive())
-            em.getTransaction().begin();  //inicia transação no banco 
-            em.merge(o);   //salva objeto no banco
+               em.getTransaction().begin();  //inicia transação no banco 
+            em.merge(o);  //salva objeto no banco
             em.getTransaction().commit(); 
             emf.close();
         }catch(Exception e){
@@ -32,10 +32,25 @@ public class Conexao {
        }                   
     }
     
+    
+    public void Atualizar(Object o){
+        try{    
+           if(!em.getTransaction().isActive())
+               em.getTransaction().begin();  //inicia transação no banco 
+            em.merge(o);  //atualiza objeto no banco
+            em.getTransaction().commit(); 
+            emf.close();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            System.out.println(e.getMessage()); 
+       }                   
+    }
+    
+    
     public void Remover(Object obj){
       try{
         if(em.getTransaction().isActive())    
-        em.getTransaction().begin();   //inicia transação no banco
+           em.getTransaction().begin();   //inicia transação no banco
         em.remove(obj);
         em.getTransaction().commit();
       }finally{
@@ -53,12 +68,10 @@ public class Conexao {
     
     public <T extends Object> T procurarObjeto(Class<T> type, String tabela,String Condicao){
         if(!em.getTransaction().isActive())
-           em.getTransaction().begin(); 
+            em.getTransaction().begin(); 
         Query q = em.createQuery("SELECT id FROM "+tabela+" WHERE "+Condicao);
         em.getTransaction().commit();
-        return em.find(type, q.getResultList().get(0));
-
-        
+        return em.find(type, q.getResultList().get(0));       
     }
     public String findFieldValue(String campo, String tabela,String condicao){      
        if(!em.getTransaction().isActive())
@@ -87,7 +100,7 @@ public class Conexao {
     public String executeQueryUniqueResult(String query){
      if(!em.getTransaction().isActive())
          em.getTransaction().begin(); 
-       Query q = em.createQuery(query);//campos separados por virgula
+       Query q = em.createQuery(query);
        em.getTransaction().commit();
        return q.getResultList().get(0).toString();
     }  
@@ -95,7 +108,7 @@ public class Conexao {
     public List<String> executeQuery(String query){
      if(!em.getTransaction().isActive())
          em.getTransaction().begin(); 
-       Query q = em.createQuery(query);//campos separados por virgula
+       Query q = em.createQuery(query);
        em.getTransaction().commit();
        return q.getResultList();
     } 

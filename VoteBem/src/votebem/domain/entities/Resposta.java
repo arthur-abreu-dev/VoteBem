@@ -24,9 +24,9 @@ public class Resposta implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idResposta;
     @Column(nullable = false)
-    private int resposta;
+    private String resposta;
     @Column(nullable = false)
-    private String respCerta;
+    private String respCerta; // deve ser S ou N - é string para facilitar o uso 
 
     public int getIdResposta() {
         return idResposta;
@@ -36,11 +36,11 @@ public class Resposta implements Serializable {
         this.idResposta = idResposta;
     }
 
-    public int getResposta() {
+    public String getResposta() {
         return resposta;
     }
 
-    public void setResposta(int resposta) {
+    public void setResposta(String resposta) {
         this.resposta = resposta;
     }
 

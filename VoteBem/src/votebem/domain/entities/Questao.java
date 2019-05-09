@@ -21,6 +21,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import votebem.domain.entities.*;
 
 /**
@@ -35,16 +36,11 @@ public class Questao implements Serializable {
     private int idPergunta;
     @Column(nullable = false, length = 10)
     private int pontos;
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name="Resposta",
-//			joinColumns={@JoinColumn(name="idResposta")},
-//			inverseJoinColumns={@JoinColumn(name="idPergunta")})
-//    //@OneToMany(mappedBy = "cursos",targetEntity = Resposta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    //@ElementCollection
-//    private Set<Resposta> respostas;
+    @OneToMany(fetch = FetchType.LAZY)
+    public List<Resposta> respostas = new ArrayList<Resposta>();
     @Column(nullable = false, unique = true)
     private String pergunta;
-    @Column(nullable = false)
+    @OneToOne
     private Tema tema;
 
     public Tema getTema() {
@@ -71,14 +67,14 @@ public class Questao implements Serializable {
         this.pontos = pontos;
     }
 
-//    public Set<Resposta> getRespostas() {
-//        return respostas;
-//    }
-//
-//    public void setRespostas(Set<Resposta> respostas) {
-//        this.respostas = respostas;
-//    }
+    public List<Resposta> getRespostas() {
+        return respostas;
+    }
 
+    public void setRespostas(List<Resposta> respostas) {
+        this.respostas = respostas;
+    }
+    
     public String getPergunta() {
         return pergunta;
     }
