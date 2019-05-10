@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="VoteBem.jar" size="1123993" download="eager" />
+    <jar href="VoteBem.jar" size="1123832" download="eager" />
     <jar href="lib\antlr-2.7.6.jar" size="443432" download="eager" />
     <jar href="lib\c3p0-0.9.1.2.jar" size="610790" download="eager" />
     <jar href="lib\cglib-nodep-2.1_3.jar" size="324238" download="eager" />

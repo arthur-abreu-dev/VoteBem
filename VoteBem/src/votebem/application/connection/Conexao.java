@@ -20,16 +20,19 @@ public class Conexao {
         em = emf.createEntityManager();   // realiza as operações (CRUD)     
     }
     public void Salvar(Object o){
-        try{    
+       //try{    
            if(!em.getTransaction().isActive())
                em.getTransaction().begin();  //inicia transação no banco 
-            em.merge(o);  //salva objeto no banco
+            em.persist(o);  //salva objeto no banco
+            if(!em.getTransaction().isActive())
+               em.getTransaction().begin();
             em.getTransaction().commit(); 
             emf.close();
-        }catch(Exception e){
-            em.getTransaction().rollback();
-            System.out.println(e.getMessage()); 
-       }                   
+       // }catch(Exception e){
+            if(em.getTransaction().isActive())
+               em.getTransaction().rollback();
+      //      System.out.println(e.getMessage()); 
+      //}                   
     }
     
     

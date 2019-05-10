@@ -90,19 +90,6 @@ public class InicioController implements Initializable{
     }  
     
     private void logIn(){
-        Questao q = new Questao();
-        q.setPergunta("n sei");
-        q.setPontos(100);
-        Tema tema = new Tema();
-        tema.setNome("sei la");
-        tema.setPonto(0);
-        q.setTema(tema);
-        Resposta resp = new Resposta();
-        resp.setRespCerta("sim");
-        resp.setResposta("não");
-        q.respostas.add(resp);
-        
-        conn.Salvar(q);
     try{
       if(!"".equals(tfEmail.getText()) && tfEmail.getText() != null && !"".equals(pwSenha.getText()) && pwSenha.getText() != null){ 
         String usu = conn.findFieldValue("idUsuario", "Usuario", " email = '"+tfEmail.getText().toLowerCase()+"' and senha = '"+pwSenha.getText()+"'");
