@@ -16,7 +16,7 @@ public class Conexao {
     EntityManager em;
     
     public Conexao(){       
-        emf = Persistence.createEntityManagerFactory("VoteBemPU");  //abrir a conexão(sessão) com o banco
+        emf = Persistence.createEntityManagerFactory("VotebemPU");  //abrir a conexão(sessão) com o banco
         em = emf.createEntityManager();   // realiza as operações (CRUD)     
     }
     public void Salvar(Object o){
@@ -27,12 +27,13 @@ public class Conexao {
             if(!em.getTransaction().isActive())
                em.getTransaction().begin();
             em.getTransaction().commit(); 
-            emf.close();
-       // }catch(Exception e){
+        //}catch(Exception e){
             if(em.getTransaction().isActive())
                em.getTransaction().rollback();
-      //      System.out.println(e.getMessage()); 
-      //}                   
+     //        System.out.println(e.getMessage()); 
+     // }   
+         if(em.getTransaction().isActive())
+             em.close();
     }
     
     

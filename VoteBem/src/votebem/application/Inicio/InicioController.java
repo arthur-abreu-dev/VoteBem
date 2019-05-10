@@ -90,6 +90,7 @@ public class InicioController implements Initializable{
     }  
     
     private void logIn(){
+        Conexao x = new Conexao();
     try{
       if(!"".equals(tfEmail.getText()) && tfEmail.getText() != null && !"".equals(pwSenha.getText()) && pwSenha.getText() != null){ 
         String usu = conn.findFieldValue("idUsuario", "Usuario", " email = '"+tfEmail.getText().toLowerCase()+"' and senha = '"+pwSenha.getText()+"'");

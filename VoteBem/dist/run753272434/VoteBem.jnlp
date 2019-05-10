@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="VoteBem.jnlp">
+  <information>
+    <title>VoteBem</title>
+    <vendor>arthu</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="VoteBem.jar" size="1124720" download="eager" />
+    <jar href="lib\antlr-2.7.6.jar" size="443432" download="eager" />
+    <jar href="lib\c3p0-0.9.1.2.jar" size="610790" download="eager" />
+    <jar href="lib\cglib-nodep-2.1_3.jar" size="324238" download="eager" />
+    <jar href="lib\commons-collections-2.1.1.jar" size="175426" download="eager" />
+    <jar href="lib\commons-logging-1.0.4.jar" size="38015" download="eager" />
+    <jar href="lib\dom4j-1.6.1.jar" size="313898" download="eager" />
+    <jar href="lib\ejb3-persistence.jar" size="50574" download="eager" />
+    <jar href="lib\hibernate-annotations.jar" size="265130" download="eager" />
+    <jar href="lib\hibernate-commons-annotations.jar" size="66426" download="eager" />
+    <jar href="lib\hibernate-entitymanager.jar" size="116544" download="eager" />
+    <jar href="lib\hibernate-validator.jar" size="60992" download="eager" />
+    <jar href="lib\hibernate3.jar" size="2255753" download="eager" />
+    <jar href="lib\javassist.jar" size="471005" download="eager" />
+    <jar href="lib\jboss-archive-browsing.jar" size="413698" download="eager" />
+    <jar href="lib\jfoenix-0.0.0-SNAPSHOT.jar" size="2685549" download="eager" />
+    <jar href="lib\jta.jar" size="8812" download="eager" />
+    <jar href="lib\log4j-1.2.11.jar" size="350627" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.47-bin.jar" size="1007505" download="eager" />
+    <jar href="lib\servlet-api-6.0.53.jar" size="132978" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="votebem.application.main.Inicio"  name="VoteBem" />
+  <update check="always"/>
+</jnlp>

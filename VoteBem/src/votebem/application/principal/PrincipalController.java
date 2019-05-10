@@ -1,5 +1,6 @@
 package votebem.application.principal;
 
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -10,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -17,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import votebem.application.connection.Conexao;
+import votebem.domain.entities.*;
 
 /**
  * FXML Controller class
@@ -62,7 +65,7 @@ public class PrincipalController implements Initializable {
     private AnchorPane apSugerirQuestao;
 
     @FXML
-    private ComboBox<String> cbEscolherTema;
+    private JFXComboBox<String> cbEscolherTema;
 
     @FXML
     private TextArea taQuestao;
@@ -130,6 +133,18 @@ public class PrincipalController implements Initializable {
     @FXML
     private ComboBox<String> cbTemaParaResponder;
     
+    @FXML
+    private CheckBox cbCorretaA;
+
+    @FXML
+    private CheckBox cbCorretaB;
+
+    @FXML
+    private CheckBox cbCorretaC;
+
+    @FXML
+    private CheckBox cbCorretaD;
+    
     private Conexao conn = new Conexao();
     
     public static PrincipalController CurrentController;  
@@ -166,6 +181,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     void abrirAnchorSugerirQuestao(ActionEvent event) {
+        carregarTemas();
         setAllAnchorPaneInvible();
         apSugerirQuestao.visibleProperty().set(true);
         apSugerirQuestao.toFront();
@@ -242,12 +258,16 @@ public class PrincipalController implements Initializable {
     
     private void carregarTemas(){
             //carrega os temas para responder perguntas
+        cbTemaParaResponder.getItems().clear();
+        cbEscolherTema.getItems().clear();
         int auxPerg = Integer.parseInt(conn.executeQueryUniqueResult("SELECT MAX(idTema) FROM Tema"));    
         try{
         for(int i =1;i<= auxPerg;i++){
          String nomeTema =  conn.executeQueryUniqueResult("SELECT nome FROM Tema WHERE idTema = '"+i+"'"); 
-         if(!"".equals(nomeTema))
+         if(!"".equals(nomeTema)){
          cbTemaParaResponder.getItems().add(nomeTema);
+         cbEscolherTema.getItems().add(nomeTema);
+         }
         }
         }catch(Exception e){
             System.out.println(e.getMessage()); 
@@ -354,11 +374,11 @@ public class PrincipalController implements Initializable {
         this.apSugerirQuestao = apSugerirQuestao;
     }
 
-    public ComboBox<String> getCbEscolherTema() {
+    public JFXComboBox<String> getCbEscolherTema() {
         return cbEscolherTema;
     }
 
-    public void setCbEscolherTema(ComboBox<String> cbEscolherTema) {
+    public void setCbEscolherTema(JFXComboBox<String> cbEscolherTema) {
         this.cbEscolherTema = cbEscolherTema;
     }
 
@@ -544,6 +564,82 @@ public class PrincipalController implements Initializable {
 
     public static void setCurrentController(PrincipalController CurrentController) {
         PrincipalController.CurrentController = CurrentController;
+    }
+    
+    @FXML
+    void actionSugerirQuestao(ActionEvent event) {
+       // try{
+        Questao q = new Questao();
+        q.setPergunta(taQuestao.getText());
+        q.setPontos(5);
+//        Tema tema = new Tema();
+//        tema.setNome(cbEscolherTema.valueProperty().get());
+//        tema.setPonto(0);
+        Tema tema = conn.procurarPorId(Tema.class,Integer.parseInt(conn.findFieldValue("idTema", "Tema", "nome = '"+cbEscolherTema.valueProperty().get()+"'")));
+        q.setTema(tema);
+        for(int i =0;i<3;i++){
+            
+            if(i==0 && !"".equals(taOpcaoA.getText())){
+                Resposta resp = new Resposta();
+                if(cbCorretaA.selectedProperty().get())
+                   resp.setRespCerta("S");
+                else
+                   resp.setRespCerta("N"); 
+                resp.setResposta(taOpcaoA.getText());
+                conn.Salvar(resp);
+                q.respostas.add(resp);           
+            }
+            if(i==1 && !"".equals(taOpcaoB.getText())){
+                Resposta resp = new Resposta();
+                if(cbCorretaB.selectedProperty().get())
+                   resp.setRespCerta("S");
+                else
+                   resp.setRespCerta("N");
+                resp.setResposta(taOpcaoB.getText());
+                conn.Salvar(resp);
+                q.respostas.add(resp);
+            }
+            if(i==2 && !"".equals(taOpcaoC.getText())){
+                Resposta resp = new Resposta();
+                if(cbCorretaC.selectedProperty().get())
+                   resp.setRespCerta("S");
+                else
+                   resp.setRespCerta("N");
+                resp.setResposta(taOpcaoC.getText());
+                conn.Salvar(resp);
+                q.respostas.add(resp);
+            }
+            if(i==3 && !"".equals(taOpcaoD.getText())){
+                Resposta resp = new Resposta();
+                if(cbCorretaD.selectedProperty().get())
+                   resp.setRespCerta("S");
+                else
+                   resp.setRespCerta("N");
+                resp.setResposta(taOpcaoD.getText());
+                conn.Salvar(resp);
+                q.respostas.add(resp);
+            }
+           
+        }   
+       
+        
+        conn.Salvar(q);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Sugestão de Questão");
+        alert.setContentText("Sugestão de questão efetuada com sucesso!");
+        alert.showAndWait();
+       // }catch(Exception e){
+//        Alert alert = new Alert(Alert.AlertType.ERROR);
+//             alert.setTitle("Erro");
+//             alert.setHeaderText("Erro ao sugerir pergunta ");
+//             alert.setContentText("Preencha pelo menos dois campos de respostas e selecione um tema");
+//             alert.showAndWait();
+//             
+//         e.getCause();
+//         e.getLocalizedMessage();
+//         e.getStackTrace();
+//         e.getSuppressed();
+//       / }
     }
     
     
