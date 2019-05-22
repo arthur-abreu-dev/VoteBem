@@ -19,19 +19,20 @@ public class Conexao {
         emf = Persistence.createEntityManagerFactory("VotebemPU");  //abrir a conexão(sessão) com o banco
         em = emf.createEntityManager();   // realiza as operações (CRUD)     
     }
-    public void Salvar(Object o){
-       //try{    
+    public void Salvar(Object o)throws Exception{
+       try{    
            if(!em.getTransaction().isActive())
                em.getTransaction().begin();  //inicia transação no banco 
             em.persist(o);  //salva objeto no banco
             if(!em.getTransaction().isActive())
                em.getTransaction().begin();
             em.getTransaction().commit(); 
-        //}catch(Exception e){
+        }catch(Exception e){
             if(em.getTransaction().isActive())
                em.getTransaction().rollback();
-     //        System.out.println(e.getMessage()); 
-     // }   
+            System.out.println(e.getMessage()); 
+            throw new Exception();
+      }   
          if(em.getTransaction().isActive())
              em.close();
     }

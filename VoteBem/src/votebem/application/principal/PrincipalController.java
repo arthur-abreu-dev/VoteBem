@@ -251,6 +251,7 @@ public class PrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         CurrentController = this;
         carregarTemas();
+        carregarPerguntas();
         
              
         
@@ -566,19 +567,28 @@ public class PrincipalController implements Initializable {
         PrincipalController.CurrentController = CurrentController;
     }
     
+    private void limparCamposSugestao(){
+        taOpcaoA.setText("");
+        taOpcaoB.setText("");
+        taOpcaoC.setText("");
+        taOpcaoD.setText("");
+        taQuestao.setText("");
+        cbEscolherTema.valueProperty().setValue("");
+        cbCorretaA.selectedProperty().set(false);
+        cbCorretaB.selectedProperty().set(false);
+        cbCorretaC.selectedProperty().set(false);
+        cbCorretaD.selectedProperty().set(false);
+    }
+    
     @FXML
     void actionSugerirQuestao(ActionEvent event) {
-       // try{
+        try{
         Questao q = new Questao();
         q.setPergunta(taQuestao.getText());
         q.setPontos(5);
-//        Tema tema = new Tema();
-//        tema.setNome(cbEscolherTema.valueProperty().get());
-//        tema.setPonto(0);
         Tema tema = conn.procurarPorId(Tema.class,Integer.parseInt(conn.findFieldValue("idTema", "Tema", "nome = '"+cbEscolherTema.valueProperty().get()+"'")));
         q.setTema(tema);
-        for(int i =0;i<3;i++){
-            
+        for(int i =0;i<=3;i++){         
             if(i==0 && !"".equals(taOpcaoA.getText())){
                 Resposta resp = new Resposta();
                 if(cbCorretaA.selectedProperty().get())
@@ -628,18 +638,19 @@ public class PrincipalController implements Initializable {
         alert.setHeaderText("Sugestão de Questão");
         alert.setContentText("Sugestão de questão efetuada com sucesso!");
         alert.showAndWait();
-       // }catch(Exception e){
-//        Alert alert = new Alert(Alert.AlertType.ERROR);
-//             alert.setTitle("Erro");
-//             alert.setHeaderText("Erro ao sugerir pergunta ");
-//             alert.setContentText("Preencha pelo menos dois campos de respostas e selecione um tema");
-//             alert.showAndWait();
-//             
-//         e.getCause();
-//         e.getLocalizedMessage();
-//         e.getStackTrace();
-//         e.getSuppressed();
-//       / }
+        limparCamposSugestao();
+        }catch(Exception e){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setTitle("Erro");
+             alert.setHeaderText("Erro ao sugerir pergunta ");
+             alert.setContentText("Preencha pelo menos dois campos de respostas e selecione um tema");
+             alert.showAndWait();
+             
+         e.getCause();
+         e.getLocalizedMessage();
+         e.getStackTrace();
+         e.getSuppressed();
+        }
     }
     
     
