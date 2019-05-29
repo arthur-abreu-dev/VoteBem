@@ -12,41 +12,59 @@ import javax.persistence.Query;
  */
 public class Conexao {
     
-    EntityManagerFactory emf;
-    EntityManager em;
+    private EntityManagerFactory entityManagerFactory;
+    private EntityManager entityManager;    
+    
+    public EntityManagerFactory getEntityManagerFactory() {
+        return entityManagerFactory;
+    }
+
+    public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+    
+    
     
     public Conexao(){       
-        emf = Persistence.createEntityManagerFactory("VotebemPU");  //abrir a conexão(sessão) com o banco
-        em = emf.createEntityManager();   // realiza as operações (CRUD)     
+        entityManagerFactory = Persistence.createEntityManagerFactory("VotebemPU");  //abrir a conexão(sessão) com o banco
+        entityManager = entityManagerFactory.createEntityManager();   // realiza as operações (CRUD)     
     }
     public void Salvar(Object o)throws Exception{
        try{    
-           if(!em.getTransaction().isActive())
-               em.getTransaction().begin();  //inicia transação no banco 
-            em.persist(o);  //salva objeto no banco
-            if(!em.getTransaction().isActive())
-               em.getTransaction().begin();
-            em.getTransaction().commit(); 
+           if(!entityManager.getTransaction().isActive())
+               entityManager.getTransaction().begin();  //inicia transação no banco 
+            entityManager.persist(o);  //salva objeto no banco
+            if(!entityManager.getTransaction().isActive())
+               entityManager.getTransaction().begin();
+            entityManager.getTransaction().commit(); 
         }catch(Exception e){
-            if(em.getTransaction().isActive())
-               em.getTransaction().rollback();
+            if(entityManager.getTransaction().isActive())
+               entityManager.getTransaction().rollback();
             System.out.println(e.getMessage()); 
             throw new Exception();
       }   
-         if(em.getTransaction().isActive())
-             em.close();
+         if(entityManager.getTransaction().isActive())
+             entityManager.close();
     }
     
     
     public void Atualizar(Object o){
         try{    
-           if(!em.getTransaction().isActive())
-               em.getTransaction().begin();  //inicia transação no banco 
-            em.merge(o);  //atualiza objeto no banco
-            em.getTransaction().commit(); 
-            emf.close();
+           if(!entityManager.getTransaction().isActive())
+               entityManager.getTransaction().begin();  //inicia transação no banco 
+            entityManager.merge(o);  //atualiza objeto no banco
+            entityManager.getTransaction().commit(); 
+            entityManager.close();
         }catch(Exception e){
-            em.getTransaction().rollback();
+            entityManager.getTransaction().rollback();
             System.out.println(e.getMessage()); 
        }                   
     }
@@ -54,67 +72,67 @@ public class Conexao {
     
     public void Remover(Object obj){
       try{
-        if(em.getTransaction().isActive())    
-           em.getTransaction().begin();   //inicia transação no banco
-        em.remove(obj);
-        em.getTransaction().commit();
+        if(entityManager.getTransaction().isActive())    
+           entityManager.getTransaction().begin();   //inicia transação no banco
+        entityManager.remove(obj);
+        entityManager.getTransaction().commit();
       }finally{
-        emf.close();
+        entityManager.close();
         }
        
     }
     public void close(){
-      emf.close();
+      entityManagerFactory.close();
     }
     
     public <T extends Object> T procurarPorId(Class<T> type, Object o){
-     return em.find(type, o);
+     return entityManager.find(type, o);
     }
     
     public <T extends Object> T procurarObjeto(Class<T> type, String tabela,String Condicao){
-        if(!em.getTransaction().isActive())
-            em.getTransaction().begin(); 
-        Query q = em.createQuery("SELECT id FROM "+tabela+" WHERE "+Condicao);
-        em.getTransaction().commit();
-        return em.find(type, q.getResultList().get(0));       
+        if(!entityManager.getTransaction().isActive())
+            entityManager.getTransaction().begin(); 
+        Query q = entityManager.createQuery("SELECT id FROM "+tabela+" WHERE "+Condicao);
+        entityManager.getTransaction().commit();
+        return entityManager.find(type, q.getResultList().get(0));       
     }
     public String findFieldValue(String campo, String tabela,String condicao){      
-       if(!em.getTransaction().isActive())
-         em.getTransaction().begin(); 
-       Query q = em.createQuery("SELECT "+campo+" FROM "+tabela+" WHERE "+condicao+"");
-       em.getTransaction().commit();
+       if(!entityManager.getTransaction().isActive())
+         entityManager.getTransaction().begin(); 
+       Query q = entityManager.createQuery("SELECT "+campo+" FROM "+tabela+" WHERE "+condicao+"");
+       entityManager.getTransaction().commit();
        return q.getResultList().get(0).toString();
     }
    
     public List<Object> findObjectListFiltered(String tabela,String condicao){      
-       if(!em.getTransaction().isActive())
-         em.getTransaction().begin(); 
-       Query q = em.createQuery("SELECT * FROM "+tabela+" WHERE "+condicao+"");
-       em.getTransaction().commit();
+       if(!entityManager.getTransaction().isActive())
+         entityManager.getTransaction().begin(); 
+       Query q = entityManager.createQuery("SELECT * FROM "+tabela+" WHERE "+condicao+"");
+       entityManager.getTransaction().commit();
        return q.getResultList();
     }
     
       public List<Object> findObjectList(String tabela,String campos){      
-       if(!em.getTransaction().isActive())
-         em.getTransaction().begin(); 
-       Query q = em.createQuery("SELECT "+campos+" FROM "+tabela);//campos separados por virgula
-       em.getTransaction().commit();
+       if(!entityManager.getTransaction().isActive())
+         entityManager.getTransaction().begin(); 
+       Query q = entityManager.createQuery("SELECT "+campos+" FROM "+tabela);//campos separados por virgula
+       entityManager.getTransaction().commit();
        return q.getResultList();
     }
       
     public String executeQueryUniqueResult(String query){
-     if(!em.getTransaction().isActive())
-         em.getTransaction().begin(); 
-       Query q = em.createQuery(query);
-       em.getTransaction().commit();
+     if(!entityManager.getTransaction().isActive())
+         entityManager.getTransaction().begin(); 
+       Query q = entityManager.createQuery(query);
+       entityManager.getTransaction().commit();
        return q.getResultList().get(0).toString();
     }  
     
     public List<String> executeQuery(String query){
-     if(!em.getTransaction().isActive())
-         em.getTransaction().begin(); 
-       Query q = em.createQuery(query);
-       em.getTransaction().commit();
+     if(!entityManager.getTransaction().isActive())
+         entityManager.getTransaction().begin(); 
+       Query q = entityManager.createQuery(query);
+       entityManager.getTransaction().commit();
        return q.getResultList();
     } 
 

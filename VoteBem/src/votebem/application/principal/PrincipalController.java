@@ -276,7 +276,7 @@ public class PrincipalController implements Initializable {
     }
     
     private void carregarPerguntas(){
-    
+        conn.findObjectList("", "");
     }
 
     public StackPane getSpPrincipal() {
