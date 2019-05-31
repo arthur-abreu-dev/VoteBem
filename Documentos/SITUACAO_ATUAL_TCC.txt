@@ -1,0 +1,32 @@
+--------------------DIAGRAMAS             |--|
+-ESTADOS                                  |  |
+-ATIVIDADES                               |  |
+-SEQUENCIA                                |  |
+-CASO DE USO                              |  |
+-CLASSES                                  |  |
+-IMPLANTAÇÃO                              |  |                           
+--------------------- PROGRAMAÇÃO         |--|
+-----WEB                                  |--|
+-SUGERIR QUESTÃO                          |  |
+-RESPONDER QUESTÃO                        |  |
+-PERFIL                                   |  |
+-CADASTRAR USUARIO                        |  |
+-LOGAR                                    |  |
+-----DESKTOP                              |--|
+-SUGERIR QUESTÃO                          |OK|
+-RESPONDER QUESTÃO                        |  |
+-PERFIL                                   |  |
+-CADASTRAR USUARIO                        |OK|
+-LOGAR                                    |OK|
+---------------------- ESCRITA            |--|
+-INTRODUÇÃO                               |  |
+-DESENVOLVIMENTO                          |  |
+-CONCLUSÃO                                |  |
+-REFERENCIAS                              |  |
+----------------------- TESTES            |--|
+-TDD                                      |  |
+-JUNIT(TESTES UNITARIOS)                  |  |
+-----------------------BANCO DE DADOS     |--|
+-FISICO(HIBERNATE)                        |OK|
+-LOGICO                                   |OK|
+-CONCEITUAL                               |OK|
